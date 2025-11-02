@@ -6,7 +6,7 @@
 This workspace contains the OpenSpec-driven spec and change-management artifacts for an AI/IoT student project (HW3) focused on integrating LLM-based assistants with IoT and backend services. The repo uses OpenSpec to propose, review, and track changes to capabilities and to keep the "source of truth" for behavioral requirements.
 
 ## Tech Stack
-- Python 3.9+ for ML training/inference (scikit-learn, pandas, numpy, joblib)
+- Python 3.12 (recommended on Windows) for ML training/inference (scikit-learn, pandas, numpy, joblib)
 - Streamlit for interactive UI and deployment
 - Node.js (tested on Node 16+) and npm for OpenSpec CLI tooling
 - OpenSpec CLI (`@fission-ai/openspec`) for spec-driven workflow

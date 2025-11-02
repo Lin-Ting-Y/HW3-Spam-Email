@@ -46,6 +46,12 @@ with st.sidebar:
         st.subheader('Metrics')
         st.metric('Accuracy', f"{metrics.get('accuracy', 0):.3f}")
         st.metric('F1', f"{metrics.get('f1', 0):.3f}")
+        ap_val = metrics.get('average_precision', None)
+        auc_val = metrics.get('roc_auc', None)
+        if ap_val is not None:
+            st.metric('AP', f"{ap_val:.3f}")
+        if auc_val is not None:
+            st.metric('ROC AUC', f"{auc_val:.3f}")
     st.caption('Artifacts expected in models/ and reports/.')
 
 # Tabs for flow similar to example app
@@ -196,6 +202,29 @@ with tab_explore:
                 st.image(ROC_FIG_PATH, caption='ROC Curve', use_container_width=True)
             else:
                 st.info('ROC curve not found. Run training to generate it.')
+
+        # Display AP and ROC-AUC metrics if available, and a download for metrics.json
+        if metrics:
+            ap = metrics.get('average_precision', None)
+            auc = metrics.get('roc_auc', None)
+            k1, k2 = st.columns(2)
+            with k1:
+                if ap is not None:
+                    st.metric('Average Precision (AP)', f"{ap:.3f}")
+                else:
+                    st.info('AP not available. Re-run training to generate PR curve.')
+            with k2:
+                if auc is not None:
+                    st.metric('ROC AUC', f"{auc:.3f}")
+                else:
+                    st.info('ROC AUC not available. Re-run training to generate ROC curve.')
+
+            st.download_button(
+                label='Download metrics.json',
+                data=json.dumps(metrics, indent=2),
+                file_name='metrics.json',
+                mime='application/json'
+            )
 
     # ---- Top Tokens by Class (dynamic) ----
     st.subheader('Top Tokens by Class')
