@@ -1,5 +1,7 @@
 # SMS Spam Classifier — SVM (Streamlit)
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://hw3-spam-email.streamlit.app/)
+
 This project trains a baseline SMS spam classifier (TF‑IDF + LinearSVC with calibrated probabilities) and provides a Streamlit app for interactive inference and visuals.
 
 Live demo:
