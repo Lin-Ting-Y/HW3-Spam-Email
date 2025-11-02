@@ -1,0 +1,14 @@
+{
+  "accuracy": 0.9856502242152466,
+  "precision": 0.9523809523809523,
+  "recall": 0.9395973154362416,
+  "f1": 0.9459459459459459,
+  "labels": [
+    "ham",
+    "spam"
+  ],
+  "average_precision": 0.9783482160876619,
+  "roc_auc": 0.990203843428238,
+  "pr_curve_path": "reports\\pr_curve.png",
+  "roc_curve_path": "reports\\roc_curve.png"
+}

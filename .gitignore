@@ -1,0 +1,20 @@
+# Keep this .gitignore minimal per Task 5.4
+
+# Python bytecode cache
+__pycache__/
+
+# VS Code settings
+.vscode/
+
+# Local virtual/env folders (Conda/venv) if created inside the repo
+.venv/
+venv/
+env/
+.conda/
+.mamba/
+.env/
+.virtualenv/
+
+# NOTE:
+# Do NOT exclude models/ or reports/ as requested
+venv/
