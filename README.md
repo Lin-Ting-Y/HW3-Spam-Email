@@ -43,6 +43,42 @@ Artifacts:
 - `reports/pr_curve.png`
 - `reports/roc_curve.png`
 
+## Evaluation
+
+The trained baseline SVM was evaluated on the held-out test split. The numbers below are taken from `reports/metrics.json` produced by `scripts/train_baseline.py`.
+
+- Accuracy: 0.9856502242152466 (98.565%)
+- Precision (spam): 0.9523809523809523 (95.24%)
+- Recall (spam): 0.9395973154362416 (93.96%)
+- F1 (spam): 0.9459459459459459 (94.59%)
+- Average Precision (AP): 0.9783482160876619
+- ROC AUC: 0.990203843428238
+
+Confusion matrix and curves:
+
+- Confusion matrix image: `reports/confusion_matrix.png`
+- Precision-Recall curve: `reports/pr_curve.png` (path in `reports/metrics.json`)
+- ROC curve: `reports/roc_curve.png` (path in `reports/metrics.json`)
+
+Notes on these results:
+
+- The dataset is imbalanced (many more ham messages than spam), so overall accuracy is high; the precision, recall and F1 for the spam class are more informative about spam-detection quality.
+- Precision ~= 95% means about 5% of predicted spam messages are false positives. Recall ~= 94% means the model finds most spam messages.
+
+How to reproduce the evaluation
+
+1. Ensure the raw dataset is present: `data/sms_spam_no_header.csv`.
+2. Create train/test splits and train the model:
+
+```powershell
+python scripts/ingest_spam.py
+python scripts/train_baseline.py
+```
+
+3. The training script will save metrics and figures to the `reports/` folder (see `reports/metrics.json`). You can open the confusion matrix and curves from that folder.
+
+If you'd like, I can add a short script that loads `models/spam_svm.joblib` and prints the same metrics (or computes a confusion-matrix table) for easier CLI inspection.
+
 ## Run Streamlit App
 ```powershell
 streamlit run streamlit_app.py
