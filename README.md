@@ -28,6 +28,29 @@ conda run -n newenv python -m pip install -r requirements.txt
 ## Data
 - Place the raw dataset at `data/sms_spam_no_header.csv` (already present in this repo).
 
+### Data description
+
+- Raw dataset: `data/sms_spam_no_header.csv` (classic SMS spam corpus).
+- Processed splits (created by `scripts/ingest_spam.py`):
+	- `data/processed/train.csv` — training split
+	- `data/processed/test.csv` — test split
+
+Schema (CSV columns):
+
+- `label` — class label, either `ham` or `spam`
+- `text` — raw SMS message text (string)
+
+Counts and class balance (computed from `data/processed/*` splits in this repo):
+
+- Train: 4,459 messages — ham: 3,861, spam: 598
+- Test: 1,115 messages — ham: 966, spam: 149
+- Combined: 5,574 messages — ham: 4,827 (86.60%), spam: 747 (13.40%)
+
+Example row (CSV):
+
+`ham,No message..no responce..what happend?`
+
+
 ## Ingest & Train
 ```powershell
 # Create train/test splits
@@ -56,9 +79,17 @@ The trained baseline SVM was evaluated on the held-out test split. The numbers b
 
 Confusion matrix and curves:
 
-- Confusion matrix image: `reports/confusion_matrix.png`
-- Precision-Recall curve: `reports/pr_curve.png` (path in `reports/metrics.json`)
-- ROC curve: `reports/roc_curve.png` (path in `reports/metrics.json`)
+![Confusion matrix](reports/confusion_matrix.png)
+
+*Confusion matrix on the test split.*
+
+![Precision-Recall curve](reports/pr_curve.png)
+
+*Precision–Recall curve (average precision in `reports/metrics.json`).*
+
+![ROC curve](reports/roc_curve.png)
+
+*ROC curve (ROC AUC in `reports/metrics.json`).*
 
 Notes on these results:
 
